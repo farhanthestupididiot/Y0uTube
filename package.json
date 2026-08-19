@@ -1,0 +1,49 @@
+{
+  "name": "y0utube",
+  "productName": "Y0uTube",
+  "version": "0.1.0",
+  "description": "System-tray YouTube flyout for Windows: phone-shaped window, desktop YouTube, MV2 Chrome extensions (uBlock Origin, SponsorBlock), audio keeps playing when dismissed.",
+  "main": "dist/main.js",
+  "author": "Y0uTube contributors",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "electron .",
+    "smoke": "electron . --smoke-test",
+    "dist": "tsc && electron-builder --win",
+    "gen:icons": "node scripts/gen-icons.js",
+    "fetch:ublock": "node scripts/fetch-ublock.js",
+    "sb:install": "node scripts/build-sponsorblock-mv2.js"
+  },
+  "dependencies": {
+    "electron-chrome-extensions": "^4.9.0"
+  },
+  "devDependencies": {
+    "electron": "^37.10.3",
+    "electron-builder": "^26.15.3",
+    "typescript": "^5.9.0"
+  },
+  "build": {
+    "appId": "com.electron.y0utube",
+    "files": [
+      "dist/**",
+      "renderer/**",
+      "build/**"
+    ],
+    "extraResources": [
+      {
+        "from": "extensions",
+        "to": "extensions"
+      }
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "win": {
+      "target": "nsis"
+    }
+  }
+}

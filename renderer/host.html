@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <!-- No CSP meta: a restrictive policy on the host page also blocks the
+       <webview> guest from attaching. The host loads only local content. -->
+  <title>Y0uTube host</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 16px; /* room for the drop shadow */
+      background: transparent;
+      overflow: hidden;
+      height: 100%;
+      box-sizing: border-box;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      font-family: system-ui, sans-serif;
+    }
+    #shell {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #ffffff;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+    }
+    /* Top drag/extension strip (SPEC §9 dragHandle). */
+    #strip {
+      -webkit-app-region: drag;
+      flex: 0 0 16px;
+      background: #181818;
+      border-radius: 12px 12px 0 0;
+    }
+    body.no-handle #strip {
+      display: none;
+    }
+    webview {
+      flex: 1;
+      min-height: 0;
+      border: 0;
+      border-radius: 0 0 12px 12px;
+    }
+  </style>
+</head>
+<body>
+  <div id="shell">
+    <!-- The <webview> is created by host-preload (JS-created, preload+src set
+         before insertion; no partition attribute — all verified empirically). -->
+    <div id="strip" title="Y0uTube — drag to move"></div>
+  </div>
+</body>
+</html>

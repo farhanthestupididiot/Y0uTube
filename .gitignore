@@ -1,0 +1,12 @@
+node_modules/
+dist/
+release/
+extensions/**
+!extensions/.gitkeep
+
+# Build worktrees (extension source checkouts)
+work/
+*.log
+
+# Local tooling state
+.freebuff/
